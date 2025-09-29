@@ -1,8 +1,10 @@
 package br.insper.cotacao.stocks.controller;
 
 import br.insper.cotacao.stocks.dto.StockDTO;
+import br.insper.cotacao.stocks.service.Movimentacao;
 import br.insper.cotacao.stocks.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,12 +26,19 @@ public class StockController {
         return stockService.listAll();
     }
 
+    @GetMapping("/{ticker}")
+    public StockDTO getByTicker(@PathVariable String ticker) {
+        return stockService.getByTicker(ticker);
+    }
+
+    @GetMapping("/{ticker}/movimentacao")
+    public List<Movimentacao> getMovimentacoesByTicker(@PathVariable String ticker) {
+        return stockService.listMovimentacao(ticker);
+    }
+
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
         stockService.delete(id);
     }
 
-    // adcione as rotas para buscar uma ação GET /stocks/{id}
-    // e para editar o lastValue de uma ação PUT /stocks/{id}
-    // façaa o teste de 100% do codigo
 }

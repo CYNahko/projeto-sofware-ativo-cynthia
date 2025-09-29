@@ -1,6 +1,5 @@
 package br.insper.cotacao.stocks.controller;
 
-
 import br.insper.cotacao.stocks.dto.StockDTO;
 import br.insper.cotacao.stocks.service.StockService;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -31,7 +29,7 @@ public class StockControllerTest {
     public MockMvc mockMvc; //sobe um servidor de mentira
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         mockMvc = MockMvcBuilders
                 .standaloneSetup(stockController)
                 .build();
@@ -39,25 +37,28 @@ public class StockControllerTest {
 
     @Test
     public void test_listAllShouldReturnOneStock() throws Exception {
+
         StockDTO stockDTO = new StockDTO(
                 1,
                 "PETR",
                 "Petrobras",
+                "descricao",
                 (float) 100.0,
                 LocalDate.now(),
                 LocalDate.now(),
-                null
-        );
+                null);
 
-        Mockito.when(stockService.listAll()).
-                thenReturn(List.of(stockDTO));
+        Mockito.when(stockService.listAll())
+                .thenReturn(List.of(stockDTO));
 
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/stocks")
-        ).andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].ticker").value("PETR"));
-
-
+        )
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].ticker")
+                        .value("PETR"));
 
     }
+
+
 }
