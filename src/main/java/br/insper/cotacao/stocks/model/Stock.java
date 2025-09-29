@@ -14,6 +14,7 @@ public class Stock {
 
     private String ticker;
     private String name;
+    @Column(name = "last_val")
     private Float lastValue;
     private LocalDate dateLastValue;
     private LocalDate dateRegister;
