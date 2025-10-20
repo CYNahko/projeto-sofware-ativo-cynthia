@@ -27,7 +27,7 @@ public class StockController {
         if (!roles.contains("Admin")){
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
-        return stockService.create(dto);
+        return stockService.create(dto, email);
     }
 
     @GetMapping
