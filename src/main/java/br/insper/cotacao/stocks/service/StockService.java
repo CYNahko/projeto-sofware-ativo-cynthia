@@ -21,11 +21,12 @@ public class StockService {
     @Autowired
     private MovimentacaoService movimentacaoService;
 
-    public StockDTO create(StockDTO dto) {
+    public StockDTO create(StockDTO dto, String email) {
         Stock stock = Stock.fromDTO(dto);
         stock.setDateLastValue(LocalDate.now());
         stock.setDateRegister(LocalDate.now());
         Stock saved = stockRepository.save(stock);
+        stock.setCreatedBy(email);
         return StockDTO.fromModel(saved);
     }
 

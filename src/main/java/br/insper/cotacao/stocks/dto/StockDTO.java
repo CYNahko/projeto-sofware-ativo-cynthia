@@ -11,6 +11,7 @@ public record StockDTO(
         String name,
         String description,
         Float lastValue,
+        String createdBy,
         LocalDate dateLastValue,
         LocalDate dateRegister,
         List<StockHistoryDTO> stockHistory
@@ -23,6 +24,7 @@ public record StockDTO(
                 stock.getName(),
                 stock.getDescription(),
                 stock.getLastValue(),
+                stock.getCreatedBy(),
                 stock.getDateLastValue(),
                 stock.getDateRegister(),
                 stock.getStockHistory() != null
